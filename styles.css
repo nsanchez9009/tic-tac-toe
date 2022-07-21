@@ -30,6 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 30px;
+    width: 420px;
     z-index: 10;
     position: absolute;
 }
