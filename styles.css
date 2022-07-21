@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+
+*::after *::before {
+    box-sizing: border-box;
+}
+
+:root {
+    --mainWhite: #fef2f2;
+    --backgroundColor: #fee2e2; 
+    --lightRed: #ef4444;
+    --darkRed: #dc2626;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background-color: var(--backgroundColor);
+}
+
+.text {
+    font-family: 'Mochiy Pop One', sans-serif;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+    #gameStatus {
+        color: var(--lightRed);
+        font-size: 30px;
+    }
+
+    #game {
+        border: 5px solid var(--darkRed);
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        height: 500px;
+        width: 500px;
+    }
+
+        .box {
+            border: 1px solid var(--lightRed);
+            background-color: var(--mainWhite);
+        }
+
+    #restart {
+        background-image: url(./media/restart.png);
+        background-position: center;
+        background-size: contain;
+        height: 40px;
+        width: 40px;
+        opacity: 80%;
+        transition: all .1s ease-in-out;
+    }
+        @keyframes rotate {
+                    from {
+                        transform: rotate(0deg);
+                    }
+
+                    to {
+                        transform: rotate(-359deg);
+                    }
+        }
+
+        #restart:hover {
+            opacity: 100%;
+            animation: rotate .5s;
+        }
+
+        
