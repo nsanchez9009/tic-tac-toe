@@ -2,6 +2,13 @@ function playerFactory(name, turn){
     return {name, turn, moves: []};
 }
 
+function createGameBoard(gameBoard) {
+    for (let i = 0; i < 9; i++){
+        gameBoard[i] = {value: "", played: false};
+    }
+    return gameBoard;
+}
+
 function checkWin(player){
     const movesArray = player.moves.sort(function(a, b){return a-b});
     
@@ -25,8 +32,18 @@ function checkWin(player){
     return false;
 }
 
-function restart(){
+function restartGame(){
+    boxes.forEach(box => box.textContent = "");
+    gameStatus.textContent = "Player X's turn";
+    
+    gameBoard = createGameBoard(gameBoard);
+    game.moves = 0;
+    game.gameOver = false;
 
+    playerX.moves = [];
+    playerX.turn = true;
+    playerO.moves = [];
+    playerO.turn = false;
 }
 
 function makeMove(player, player2, box){
@@ -61,16 +78,16 @@ function makeMove(player, player2, box){
 
 const gameStatus = document.querySelector("#gameStatus");
 const possibleWins = ["012", "345", "678", "036", "147", "258", "048", "246"];
+
 const playerX = playerFactory("X", true);
 const playerO = playerFactory("O", false);
-const gameBoard = [];
+
+let gameBoard = [];
+gameBoard = createGameBoard(gameBoard);
+
 const game = {
     moves: 0,
     gameOver: false,
-}
-
-for (let i = 0; i < 9; i++){
-    gameBoard[i] = {value: "", played: false};
 }
 
 const boxes = document.querySelectorAll(".box");
@@ -88,4 +105,22 @@ boxes.forEach(box => box.addEventListener("click", () => {
         makeMove(playerO, playerX, box);
     }
 }));
+
+const restartButton = document.querySelector("#restart");
+restartButton.addEventListener("click", () => restartGame());
+
+const title = document.querySelector("#title");
+const main = document.querySelector("#main");
+const startMenu = document.querySelector("#startMenu");
+
+const playButton = document.querySelector("#playButton");
+playButton.addEventListener("click", () => {
+    playButton.classList.add("clicked");
+    title.classList.add("clicked");
+    main.classList.add("active");
+});
+
+title.addEventListener("transitionend", () => {
+    startMenu.remove();
+});
 
